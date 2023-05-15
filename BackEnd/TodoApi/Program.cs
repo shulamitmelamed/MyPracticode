@@ -12,7 +12,7 @@ builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 app.UseCors(builder => builder
-     .AllowAnyOrigin()
+     .WithOrigins("https://practicodeclient-3rq9.onrender.com/")
      .AllowAnyMethod()
      .AllowAnyHeader());  
 

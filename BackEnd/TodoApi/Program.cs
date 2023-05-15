@@ -15,6 +15,7 @@ app.UseCors(builder => builder
      .WithOrigins("https://practicodeclient-3rq9.onrender.com/","https://practicodeserver-2xh5.onrender.com/")
      .AllowAnyMethod()
      .AllowAnyHeader());  
+builder.Services.AddMvc(options => options.EnableEndpointRouting = false);
 app.UseMvc();
 app.UseEndpoints(endpoints => endpoints.MapControllers());
 if (app.Environment.IsDevelopment())

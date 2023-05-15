@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const apiClient=axios.create({
-  baseURL:"https://practicodeserver-gfpp.onrender.com"
+  baseURL:"https://practicodeserver-2xh5.onrender.com"
 })
 apiClient.interceptors.response.use(
     (response) => {

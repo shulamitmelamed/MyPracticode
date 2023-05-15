@@ -12,10 +12,11 @@ builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 app.UseCors(builder => builder
-     .WithOrigins("https://practicodeclient-3rq9.onrender.com/")
+     .WithOrigins("https://practicodeclient-3rq9.onrender.com/","https://practicodeserver-2xh5.onrender.com/")
      .AllowAnyMethod()
      .AllowAnyHeader());  
-
+app.UseMvc();
+app.UseEndpoints(endpoints => endpoints.MapControllers());
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();

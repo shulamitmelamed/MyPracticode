@@ -1,5 +1,5 @@
 import axios from "axios";
-
+//response.setHeader("Access-Control-Allow-Origin", "*");
 const apiClient=axios.create({
   baseURL:"https://practicodeserver-2xh5.onrender.com"
 })

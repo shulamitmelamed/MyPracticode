@@ -53,3 +53,10 @@ C:\Users\שולמית\Desktop\MyPracticode\BackEnd\TodoApi\obj\Debug\net6.0\refi
 C:\Users\שולמית\Desktop\MyPracticode\BackEnd\TodoApi\obj\Debug\net6.0\TodoApi.pdb
 C:\Users\שולמית\Desktop\MyPracticode\BackEnd\TodoApi\obj\Debug\net6.0\TodoApi.genruntimeconfig.cache
 C:\Users\שולמית\Desktop\MyPracticode\BackEnd\TodoApi\obj\Debug\net6.0\ref\TodoApi.dll
+C:\Users\שולמית\Desktop\MyPracticode\BackEnd\TodoApi\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\Users\שולמית\Desktop\MyPracticode\BackEnd\TodoApi\bin\Debug\net6.0\Microsoft.IdentityModel.JsonWebTokens.dll
+C:\Users\שולמית\Desktop\MyPracticode\BackEnd\TodoApi\bin\Debug\net6.0\Microsoft.IdentityModel.Logging.dll
+C:\Users\שולמית\Desktop\MyPracticode\BackEnd\TodoApi\bin\Debug\net6.0\Microsoft.IdentityModel.Protocols.dll
+C:\Users\שולמית\Desktop\MyPracticode\BackEnd\TodoApi\bin\Debug\net6.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+C:\Users\שולמית\Desktop\MyPracticode\BackEnd\TodoApi\bin\Debug\net6.0\Microsoft.IdentityModel.Tokens.dll
+C:\Users\שולמית\Desktop\MyPracticode\BackEnd\TodoApi\bin\Debug\net6.0\System.IdentityModel.Tokens.Jwt.dll

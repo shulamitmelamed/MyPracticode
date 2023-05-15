@@ -17,7 +17,7 @@ app.UseCors(builder => builder
      .AllowAnyHeader());  
 // builder.Services.AddMvc(options => options.EnableEndpointRouting = false);
 // app.UseMvc();
-app.UseEndpoints(endpoints => endpoints.MapControllers());
+// app.UseEndpoints(endpoints => endpoints.MapControllers());
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();

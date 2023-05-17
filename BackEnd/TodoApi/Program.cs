@@ -26,8 +26,6 @@ builder.Services.AddCors(options =>
         }
     );
 });
-var cors = require('cors');    
-app.use(cors({credentials: true, origin: 'https://practicodeclient-3rq9.onrender.com/'}));
 var app = builder.Build();
 app.UseCors(builder => builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
 

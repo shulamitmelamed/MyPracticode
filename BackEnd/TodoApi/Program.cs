@@ -3,66 +3,83 @@ using Microsoft.EntityFrameworkCore;
 using TodoApi;
 
 var builder = WebApplication.CreateBuilder(args);
+
 // Add database context
 builder.Services.AddDbContext<ToDoDbContext>();
+
 //swagger
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(
+        "OpenPolicy",
+        policy =>
+        {
+            policy
+                .WithOrigins("https://practicodeclient-3rq9.onrender.com/")
+                .AllowAnyHeader()
+                .AllowAnyMethod()
+                .AllowCredentials();
+        }
+    );
+});
+
 var app = builder.Build();
-app.UseCors(builder => builder
-     .WithOrigins("https://practicodeclient-3rq9.onrender.com/","https://practicodeserver-2xh5.onrender.com/")
-     .AllowAnyMethod()
-     .AllowAnyHeader());  
-// builder.Services.AddMvc(options => options.EnableEndpointRouting = false);
-// app.UseMvc();
-// app.UseEndpoints(endpoints => endpoints.MapControllers());
+app.UseCors(builder => builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
+
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
 }
 
-app.MapGet("/items", async (ToDoDbContext db) =>
-    await db.Items.ToListAsync());
+app.MapGet("/items", async (ToDoDbContext db) => await db.Items.ToListAsync());
 
-app.MapGet("/items/{id}", async (int Id, ToDoDbContext Db) =>
-await Db.Items.FindAsync(Id)
-    is Item todo
-        ? Results.Ok(todo)
-        : Results.NotFound());
+app.MapGet(
+    "/items/{id}",
+    async (int Id, ToDoDbContext Db) =>
+        await Db.Items.FindAsync(Id) is Item todo ? Results.Ok(todo) : Results.NotFound()
+);
 
-app.MapPost("/items", async (Item item, ToDoDbContext Db) =>
-{
-    var todoItem = new Item
+app.MapPost(
+    "/items",
+    async (Item item, ToDoDbContext Db) =>
     {
-        IsComplete = item.IsComplete,
-        Name = item.Name
-    };
-    Db.Items.Add(todoItem);
-    await Db.SaveChangesAsync();
-    return Results.Created($"/items/{todoItem.Id}", todoItem);
-});
-
-app.MapPut("/items/{id}", async (int Id, ToDoDbContext Db) =>
-{
-    var todo = await Db.Items.FindAsync(Id);
-    if (todo is null) return Results.NotFound();
-    todo.IsComplete = true;
-    await Db.SaveChangesAsync();
-    return Results.NoContent();
-});
-
-app.MapDelete("/items/{id}", async (int Id, ToDoDbContext Db) =>
-{
-    if (await Db.Items.FindAsync(Id) is Item todo)
-    {
-        Db.Items.Remove(todo);
+        var todoItem = new Item { IsComplete = item.IsComplete, Name = item.Name };
+        Db.Items.Add(todoItem);
         await Db.SaveChangesAsync();
-        return Results.Ok(todo);
+        return Results.Created($"/items/{todoItem.Id}", todoItem);
     }
-    return Results.NotFound();
-});
-app.MapGet("/",()=>"API is running!!!😀😀😀");
+);
+
+app.MapPut(
+    "/items/{id}",
+    async (int Id, ToDoDbContext Db) =>
+    {
+        var todo = await Db.Items.FindAsync(Id);
+        if (todo is null)
+            return Results.NotFound();
+        todo.IsComplete = true;
+        await Db.SaveChangesAsync();
+        return Results.NoContent();
+    }
+);
+
+app.MapDelete(
+    "/items/{id}",
+    async (int Id, ToDoDbContext Db) =>
+    {
+        if (await Db.Items.FindAsync(Id) is Item todo)
+        {
+            Db.Items.Remove(todo);
+            await Db.SaveChangesAsync();
+            return Results.Ok(todo);
+        }
+        return Results.NotFound();
+    }
+);
+app.MapGet("/", () => "API is running!!!😀😀😀");
 app.Run();

@@ -1,17 +1,14 @@
 import axios from "axios";
-//response.setHeader("Access-Control-Allow-Origin", "*");
-const apiClient=axios.create({
-  baseURL:"https://practicodeserver-2xh5.onrender.com"
+const apiClient = axios.create({
+  baseURL: "https://practicodeserver-2xh5.onrender.com/"
 })
 apiClient.interceptors.response.use(
-    (response) => {
-      return response;
-    },
-    (error) => {
-      console.error('An error occurred:', error);
-      return Promise.reject(error);
-    }
-  );
+  (response) => response,
+  (error) => {
+    console.error('An error occurred:', error);
+    return Promise.reject(error);
+  }
+);
 
 export default {
   getTasks: async () => {
@@ -19,18 +16,18 @@ export default {
     return result.data;
   },
 
-  addTask: async(newToDo)=>{
+  addTask: async (newToDo) => {
     console.log('addTask', newToDo)
-    await apiClient.post(`/items`, {name:newToDo,isComplete:false});
+    await apiClient.post(`/items`, { name: newToDo, isComplete: false });
     return {};
   },
 
-  setCompleted: async(id, isComplete)=>{
-    console.log('setCompleted', {id, isComplete});
+  setCompleted: async (id, isComplete) => {
+    console.log('setCompleted', { id, isComplete });
     await apiClient.put(`/items/${id}`);
   },
 
-  deleteTask:async(id)=>{
+  deleteTask: async (id) => {
     console.log('deleteTask')
     await apiClient.delete(`/items/${id}`);
   }
